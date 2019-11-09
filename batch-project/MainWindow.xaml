@@ -1,0 +1,174 @@
+﻿<Window x:Class="batch_project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:batch_project"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="700" Width="1200"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+  <Window.Resources>
+    <SolidColorBrush x:Key="BlackBrush" Color="Green"/>
+  </Window.Resources>
+  <Grid>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*"></RowDefinition>
+      <RowDefinition Height="10*"></RowDefinition>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0">
+      <ToolBarTray>
+        <ToolBar
+          Style="{DynamicResource MaterialDesignToolBar}"
+          ClipToBounds="False">
+          <Button
+            ToolTip="Refresh Program">
+            <materialDesign:PackIcon Kind="Refresh" Foreground="Green"/>
+          </Button>
+          <Button
+            ToolTip="Help outline">
+            <materialDesign:PackIcon Kind="HelpOutline" Foreground="Blue" />
+          </Button>
+          <Button
+            ToolTip="Start Batch">
+            <materialDesign:PackIcon Kind="PlayCircle" Foreground="Green"/>
+          </Button>
+          <Separator/>
+          <Label
+            Content="Method:"
+            VerticalAlignment="Center" />
+          <ComboBox>
+            <ComboBoxItem
+              Content="New Case" />
+            <ComboBoxItem
+              IsSelected="True"
+              Content="Replace" />
+            <ComboBoxItem
+              Content="Move" />
+            <ComboBoxItem
+              Content="Full Name Normal" />
+            <ComboBoxItem
+              Content="GUID Action" />
+          </ComboBox>
+          <Button
+            ToolTip="Add method">
+            <materialDesign:PackIcon Kind="Add" Foreground="Green"/>
+          </Button>
+          <Separator/>
+          <Button
+            ToolTip="Clear List action"
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+                <materialDesign:PackIcon Kind="PlaylistRemove" Foreground="Red"/>
+          </Button>
+          <Button
+            ToolTip="Remove all data from table"
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <materialDesign:PackIcon Kind="RemoveCircle" Foreground="Red"/>
+          </Button>
+          <Separator />
+          <Button
+            ToolTip="Open file to reload action"
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <materialDesign:PackIcon Kind="FolderOpen" Foreground="Orange"/>
+          </Button>
+          <ComboBox>
+            <ComboBoxItem
+              Content="default" 
+              IsSelected="True"/>
+            <ComboBoxItem
+              Content="Replace" />
+          </ComboBox>
+          <Button
+            ToolTip="Save action"
+            Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}">
+            <materialDesign:PackIcon Kind="ContentSave" Foreground="Blue"/>
+          </Button>
+        </ToolBar>
+      </ToolBarTray>
+    </StackPanel>
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"></ColumnDefinition>
+        <ColumnDefinition Width="6*"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+      <StackPanel Grid.Column="0">
+        <materialDesign:Card
+          Background="{DynamicResource PrimaryHueLightBrush}"
+          Foreground="{DynamicResource PrimaryHueLightForegroundBrush}"
+          Height="50"
+          Padding="8">  
+          <TextBlock FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold">
+            Action List
+          </TextBlock>
+        </materialDesign:Card>
+        <ListView >
+          <ListViewItem>
+            Hello
+          </ListViewItem>
+          <ListViewItem>
+            World
+          </ListViewItem>
+          <ListViewItem>
+            :)
+          </ListViewItem>
+        </ListView>
+      </StackPanel>
+      <StackPanel Grid.Column="1"
+        Background="WhiteSmoke">
+        <Grid Height="50">
+          <Grid.RowDefinitions>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+          </Grid.RowDefinitions>
+          <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="10 0">
+            <Button Uid="0" Width="150" Content="RENAME FILE" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+            <Button Uid="1" Width="150" Content="RENAME FOLDER" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="#FF2196F3" Click="Button_Click"/>
+          </StackPanel>
+          <Grid Grid.Row="1" x:Name="GridCursor" Width="150" Height="5" Background="#FF2196F3" HorizontalAlignment="Left" Margin="10 0"/>
+        </Grid>
+        <ToolBarTray>
+          <ToolBar
+          Style="{DynamicResource MaterialDesignToolBar}"
+          ClipToBounds="False">
+            <Button
+            ToolTip="Choose One..">
+              <materialDesign:PackIcon Kind="AddBox" Foreground="Green" />
+            </Button>
+            <Separator/>
+            <Button
+            ToolTip="Go to Top">
+              <materialDesign:PackIcon Kind="ArrowCompressUp" Foreground="Blue"/>
+            </Button>
+            <Button
+            ToolTip="Go up">
+              <materialDesign:PackIcon Kind="ArrowUpBold" Foreground="Blue"/>
+            </Button>
+            <Button
+            ToolTip="Go down">
+              <materialDesign:PackIcon Kind="ArrowDownBold" Foreground="Blue"/>
+            </Button>
+            <Button
+            ToolTip="Go to Bottom">
+              <materialDesign:PackIcon Kind="ArrowCollapseDown" Foreground="Blue"/>
+            </Button>
+          </ToolBar>
+        </ToolBarTray>
+        <Grid x:Name="GridMain" Height="460" Background="Aquamarine">
+          <DataGrid
+            Name="DGFileAndFolder"
+            Margin="0 8 0 0"
+            ItemsSource="{Binding Items3}"
+            CanUserSortColumns="True"
+            CanUserAddRows="False"
+            materialDesign:DataGridAssist.CellPadding="4 2 2 2"
+            materialDesign:DataGridAssist.ColumnHeaderPadding="4 2 2 2">
+          </DataGrid>
+        </Grid>
+      </StackPanel>
+
+    </Grid>
+  </Grid>
+</Window>
